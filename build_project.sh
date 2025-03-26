@@ -9,4 +9,5 @@ else
  echo "Using variable cmake_build_type: $cmake_build_type"
 fi
 
-docker run -it --rm --entrypoint sh -v $(pwd):/work -w /work cmaketemplate:builder -c "mkdir -p /work/build/$cmake_build_type && cd /work/build/$cmake_build_type && cmake -DCMAKE_BUILD_TYPE=$cmake_build_type ../.. && make"
+docker run -it --rm --entrypoint sh -v $(pwd):/work -w /work cmaketemplate:builder -c \
+ "mkdir -p /work/build/$cmake_build_type && cd /work/build/$cmake_build_type && cmake -DCMAKE_BUILD_TYPE=$cmake_build_type ../.. && make && make test"

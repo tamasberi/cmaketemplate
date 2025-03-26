@@ -21,7 +21,14 @@ else()
  message(FATAL_ERROR "Unsupported CMAKE_BUILD_TYPE: ${CMAKE_BUILD_TYPE}")
 endif()
 
+include(CTest)
+
 add_library(${product_name}Lib SHARED src/library.cpp)
 
 add_executable(${product_name} src/main.cpp)
 target_link_libraries(${product_name} PUBLIC ${product_name}Lib)
+
+add_executable(${product_name}Test test/librarytest.cpp)
+target_link_libraries(${product_name}Test PUBLIC ${product_name}Lib gtest)
+target_include_directories(${product_name}Test PUBLIC src)
+add_test(${product_name}Test ${product_name}Test --gtest_output=xml:${CMAKE_BINARY_DIR}/${product_name}-TEST-Report.xml)

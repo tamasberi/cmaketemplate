@@ -5,6 +5,9 @@ ARG cmake_version=3.31.6
 RUN apt update && apt upgrade && apt install --yes \
  build-essential \
  curl \
+ gcovr \
+ libgmock-dev \
+ libgtest-dev \
  && rm -rf /var/lib/apt/lists/*
 
 RUN cd /opt \

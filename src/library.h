@@ -5,5 +5,5 @@
 class Library : public ILibrary
 {
 public:
-   bool doSomething() override;
+   bool doSomething(const std::string& somePar) override;
 };
