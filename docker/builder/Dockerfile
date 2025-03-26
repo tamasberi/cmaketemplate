@@ -10,6 +10,7 @@ RUN apt update && apt upgrade && apt install -y \
  libgmock-dev \
  libgtest-dev \
  pip \
+ valgrind \
  && rm -rf /var/lib/apt/lists/*
 
 RUN cd /opt \
