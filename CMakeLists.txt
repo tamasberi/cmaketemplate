@@ -8,21 +8,8 @@ string(STRIP ${product_version} product_version)
 
 project(${product_name} VERSION ${product_version})
 
-set(CMAKE_CXX_STANDARD 20)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++${CMAKE_CXX_STANDARD} -Wall -Wextra -Werror -Wpedantic")
-
-if("${CMAKE_BUILD_TYPE}" STREQUAL "Debug")
- set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -ftest-coverage -fprofile-arcs -g -O0")
-elseif("${CMAKE_BUILD_TYPE}" STREQUAL "Release")
- set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3")
-elseif("${CMAKE_BUILD_TYPE}" STREQUAL "RelWithDebInfo")
- set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -O3")
-else()
- message(FATAL_ERROR "Unsupported CMAKE_BUILD_TYPE: ${CMAKE_BUILD_TYPE}")
-endif()
-
 set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
-
+include(buildconf)
 include(CTest)
 
 add_library(${product_name}Lib SHARED src/library/library.cpp)
