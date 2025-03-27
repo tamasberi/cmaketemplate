@@ -3,6 +3,7 @@ FROM cmaketemplate:base
 ARG cmake_version=3.31.6
 ARG gcovr_version=8.3
 ARG cppcheck_version=2.17.0
+ARG doxygen_version=1.13.2
 
 RUN apt update && apt upgrade && apt install -y \
  build-essential \
@@ -33,3 +34,9 @@ RUN cd /opt \
  && cd /opt \
  && rm -rf /opt/cppcheck-$cppcheck_version.tar.gz \
  && rm -rf /opt/cppcheck-$cppcheck_version
+
+RUN cd /opt \
+ && curl -fkSL https://www.doxygen.nl/files/doxygen-$doxygen_version.linux.bin.tar.gz -o doxygen-$doxygen_version.linux.bin.tar.gz \
+ && tar xzf doxygen-$doxygen_version.linux.bin.tar.gz \
+ && rm doxygen-$doxygen_version.linux.bin.tar.gz
+ENV PATH="$PATH:/opt/doxygen-$doxygen_version/bin"

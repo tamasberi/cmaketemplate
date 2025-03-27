@@ -11,6 +11,7 @@ project(${product_name} VERSION ${product_version})
 set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 
 include(buildconf)
+
 include(CTest)
 include(GNUInstallDirs)
 
@@ -32,4 +33,6 @@ include(gcovr)
 include(cppcheck)
 include(valgrind)
 include(package)
+include(doxygen)
+
 include(CPack)
