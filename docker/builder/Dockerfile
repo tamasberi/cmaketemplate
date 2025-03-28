@@ -5,7 +5,7 @@ ARG gcovr_version=8.3
 ARG cppcheck_version=2.17.0
 ARG doxygen_version=1.13.2
 
-RUN apt update && apt upgrade && apt install -y \
+RUN apt update && apt upgrade -y && apt install -y \
  build-essential \
  curl \
  libgmock-dev \
