@@ -1,6 +1,6 @@
 FROM cmaketemplate:base
 
-ARG cmake_version=3.31.6
+ARG cmake_version=4.0.0
 ARG gcovr_version=8.3
 ARG cppcheck_version=2.17.0
 ARG doxygen_version=1.13.2
