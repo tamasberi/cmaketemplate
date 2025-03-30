@@ -1,3 +1,5 @@
+
+# Adding the custom doxygen target.
 set(DOXYGEN_NAME doxygen)
 find_program(DOXYGEN_COMMAND ${DOXYGEN_NAME})
 if(EXISTS ${DOXYGEN_COMMAND})

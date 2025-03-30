@@ -1,3 +1,5 @@
+
+# Adding the custom valgrind target.
 set(VALGRIND_NAME valgrind)
 find_program(VALGRIND_COMMAND ${VALGRIND_NAME})
 if(EXISTS ${VALGRIND_COMMAND})

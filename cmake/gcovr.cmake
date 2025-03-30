@@ -1,3 +1,5 @@
+
+# Adding the custom gcovr target.
 set(GCOVR_NAME gcovr)
 find_program(GCOVR_COMMAND ${GCOVR_NAME})
 if(EXISTS ${GCOVR_COMMAND})

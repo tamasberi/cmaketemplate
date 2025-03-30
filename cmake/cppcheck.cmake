@@ -1,3 +1,5 @@
+
+# Adding the custom cppcheck target.
 set(CPPCHECK_NAME cppcheck)
 find_program(CPPCHECK_COMMAND ${CPPCHECK_NAME})
 if(EXISTS ${CPPCHECK_COMMAND})
