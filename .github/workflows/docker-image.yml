@@ -13,6 +13,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    
     - uses: actions/checkout@v4
-    - name: Build the Docker image
+    - name: Build the base docker image
       run: docker build -t cmaketemplate:base $(pwd)/docker/base
+      
+    - uses: actions/checkout@v4
+    - name: Build the builder docker image
+      run: docker build -t cmaketemplate:builder $(pwd)/docker/builder
