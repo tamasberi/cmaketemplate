@@ -30,4 +30,4 @@ jobs:
       run: docker build -t cmaketemplate:runtime $(pwd)/docker/runtime
 
     - name: Run the project
-      run: docker run -it --rm cmaketemplate:runtime
+      run: docker run --rm cmaketemplate:runtime
