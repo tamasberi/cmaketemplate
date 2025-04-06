@@ -8,12 +8,26 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+
     - uses: actions/checkout@v4
+
     - name: Build the base docker image
       run: docker build -t cmaketemplate:base $(pwd)/docker/base
+
     - name: Build the builder docker image
       run: docker build -t cmaketemplate:builder $(pwd)/docker/builder
+
     - name: Build the project (Debug)
       run: docker run --rm --entrypoint sh -v $(pwd):/work -w /work cmaketemplate:builder -c "mkdir -p /work/build/Debug && cd /work/build/Debug && cmake -DCMAKE_BUILD_TYPE=Debug ../.. && make && make test && make gcovr && make cppcheck && make valgrind && make package && make doxygen"
+
     - name: Build the project (Release)
       run: docker run --rm --entrypoint sh -v $(pwd):/work -w /work cmaketemplate:builder -c "mkdir -p /work/build/Release && cd /work/build/Release && cmake -DCMAKE_BUILD_TYPE=Release ../.. && make && make test && make gcovr && make cppcheck && make valgrind && make package && make doxygen"
+
+    - name: Copy .deb to runtime docker context
+      run: cp $(pwd)/build/Release/*.deb $(pwd)/docker/runtime
+
+    - name: Build the runtime docker image
+      run: docker build -t cmaketemplate:runtime $(pwd)/docker/runtime
+
+    - name: Run the project
+      run: docker run -it --rm cmaketemplate:runtime
