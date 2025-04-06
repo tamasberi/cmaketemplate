@@ -28,4 +28,4 @@ jobs:
 
     - uses: actions/checkout@v4
     - name: Build the project (Release)
-      run: docker run -it --rm --entrypoint sh -v $(pwd):/work -w /work cmaketemplate:builder -c "mkdir -p /work/build/Release && cd /work/build/Release && cmake -DCMAKE_BUILD_TYPE=Release ../.. && make && make test && make gcovr && make cppcheck && make valgrind && make package && make doxygen"
+      run: docker run --rm --entrypoint sh -v $(pwd):/work -w /work cmaketemplate:builder -c "mkdir -p /work/build/Release && cd /work/build/Release && cmake -DCMAKE_BUILD_TYPE=Release ../.. && make && make test && make gcovr && make cppcheck && make valgrind && make package && make doxygen"
