@@ -15,17 +15,15 @@ jobs:
     steps:
     
     - uses: actions/checkout@v4
+
     - name: Build the base docker image
       run: docker build -t cmaketemplate:base $(pwd)/docker/base
       
-    - uses: actions/checkout@v4
     - name: Build the builder docker image
       run: docker build -t cmaketemplate:builder $(pwd)/docker/builder
 
-    - uses: actions/checkout@v4
     - name: Build the project (Debug)
       run: docker run --rm --entrypoint sh -v $(pwd):/work -w /work cmaketemplate:builder -c "mkdir -p /work/build/Debug && cd /work/build/Debug && cmake -DCMAKE_BUILD_TYPE=Debug ../.. && make && make test && make gcovr && make cppcheck && make valgrind && make package && make doxygen"
 
-    - uses: actions/checkout@v4
     - name: Build the project (Release)
       run: docker run --rm --entrypoint sh -v $(pwd):/work -w /work cmaketemplate:builder -c "mkdir -p /work/build/Release && cd /work/build/Release && cmake -DCMAKE_BUILD_TYPE=Release ../.. && make && make test && make gcovr && make cppcheck && make valgrind && make package && make doxygen"
