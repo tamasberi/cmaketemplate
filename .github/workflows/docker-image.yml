@@ -13,22 +13,22 @@ jobs:
 
     - uses: actions/checkout@v4
 
-    - name: Build the $ImageName:$Tag docker image
+    - name: Build the ${{ env.ImageName }}:${{ env.Tag }} docker image
       run: docker build -t $ImageName:$Tag $(pwd)/docker/$Tag
       env:
         Tag: base
 
-    - name: Build the $ImageName:$Tag docker image
+    - name: Build the ${{ env.ImageName }}:${{ env.Tag }} docker image
       run: docker build -t $ImageName:$Tag $(pwd)/docker/$Tag
       env:
         Tag: builder      
 
-    - name: Build the project ($BuildType)
+    - name: Build the project (${{ env.BuildType }})
       run: docker run --rm --entrypoint sh -v $(pwd):/work -w /work $ImageName:builder -c "mkdir -p /work/build/$BuildType && cd /work/build/$BuildType && cmake -DCMAKE_BUILD_TYPE=$BuildType ../.. && make && make test && make gcovr && make cppcheck && make valgrind && make package && make doxygen"
       env:
         BuildType: Debug
 
-    - name: Build the project ($BuildType)
+    - name: Build the project (${{ env.BuildType }})
       run: docker run --rm --entrypoint sh -v $(pwd):/work -w /work $ImageName:builder -c "mkdir -p /work/build/$BuildType && cd /work/build/$BuildType && cmake -DCMAKE_BUILD_TYPE=$BuildType ../.. && make && make test && make gcovr && make cppcheck && make valgrind && make package && make doxygen"
       env:
         BuildType: Release
